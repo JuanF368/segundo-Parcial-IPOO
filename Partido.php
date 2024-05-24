@@ -97,6 +97,35 @@ public function __toString(){
          $cadena = $cadena. "\n"."--------------------------------------------------------"."\n";
         return $cadena;
     }
+
+    public function darEquipoGanador(){
+        $equipo1=$this->getObjEquipo1();
+        $equipo2=$this->getObjEquipo2();
+        $golesEquipo1=$this->getCantGolesE1();
+        $golesEquipo2=$this->getCantGolesE2();
+        if($golesEquipo1>$golesEquipo2){
+            $equipoGanador=$equipo1;
+        }elseif($golesEquipo1<$golesEquipo2){
+            $equipoGanador=$equipo2;
+        }else{
+            $equipoGanador=[$equipo1, $equipo2];
+        }
+        return $equipoGanador;
+    }
+
+
+    public function coeficientePartido(){
+        $coeficienteB=$this->getCoefBase();
+        $golesTotales=$this->getCantGolesE1()+$this->getCantGolesE2();
+        $jugadoresTotales=$this->getObjEquipo1()->getCantJugadores()+$this->getObjEquipo2()->getCantJugadores();
+
+        if($this->getObjEquipo1()->getObjCategoria()==$this->getObjEquipo2()->getObjCategoria()){
+            $coef=$coeficienteB*$golesTotales*$jugadoresTotales;
+        }
+        return $coef;
+
+    }
+
 }
 
 
